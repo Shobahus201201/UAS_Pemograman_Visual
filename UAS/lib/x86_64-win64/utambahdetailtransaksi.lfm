@@ -1,0 +1,277 @@
+object TfrmTambahDetailTransaksi: TTfrmTambahDetailTransaksi
+  Left = 529
+  Height = 378
+  Top = 270
+  Width = 806
+  Caption = 'Tambah Detail Transaksi'
+  ClientHeight = 378
+  ClientWidth = 806
+  DesignTimePPI = 144
+  OnCreate = FormCreate
+  object Label1: TLabel
+    Left = 216
+    Height = 45
+    Top = 48
+    Width = 362
+    Caption = 'Tambah Detail Transaksi'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -32
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 160
+    Height = 25
+    Top = 136
+    Width = 92
+    Caption = 'Pilih Barang'
+    ParentColor = False
+  end
+  object Label3: TLabel
+    Left = 160
+    Height = 25
+    Top = 192
+    Width = 115
+    Caption = 'Jumlah Barang'
+    ParentColor = False
+  end
+  object EJumlah: TEdit
+    Left = 336
+    Height = 33
+    Top = 192
+    Width = 256
+    TabOrder = 0
+    TextHint = 'Jumlah Barang'
+  end
+  object DBLookupBarang: TDBLookupComboBox
+    Left = 336
+    Height = 33
+    Top = 136
+    Width = 256
+    DataField = 'id'
+    DataSource = DataSourcePilihBarang
+    KeyField = 'id'
+    ListField = 'nama'
+    ListFieldIndex = 0
+    ListSource = DataSourcePilihBarang
+    LookupCache = False
+    OnChange = DBLookupBarangChange
+    TabOrder = 1
+  end
+  object BTambahDetailTransaksi: TButton
+    Left = 336
+    Height = 38
+    Top = 256
+    Width = 256
+    Caption = 'Tambah'
+    OnClick = BTambahDetailTransaksiClick
+    TabOrder = 2
+  end
+  object SQLQueryPilihBarang: TSQLQuery
+    IndexName = 'DEFAULT_ORDER'
+    MaxIndexesCount = 4
+    FieldDefs = <    
+      item
+        Name = 'id'
+        DataType = ftAutoInc
+        Precision = -1
+      end    
+      item
+        Name = 'kategori'
+        DataType = ftString
+        Precision = -1
+        Size = 110
+      end    
+      item
+        Name = 'nama'
+        DataType = ftString
+        Precision = -1
+        Size = 30
+      end    
+      item
+        Name = 'gambar'
+        DataType = ftString
+        Precision = -1
+        Size = 100
+      end    
+      item
+        Name = 'harga_beli'
+        DataType = ftFloat
+        Precision = -1
+      end    
+      item
+        Name = 'harga_jual'
+        DataType = ftFloat
+        Precision = -1
+      end    
+      item
+        Name = 'stok'
+        DataType = ftInteger
+        Precision = -1
+      end>
+    Active = True
+    Database = SQLConnector1
+    Transaction = SQLTransaction1
+    SQL.Strings = (
+      'SELECT * FROM data_barang;'
+    )
+    Params = <>
+    Macros = <>
+    Left = 704
+    Top = 272
+  end
+  object SQLTransaction1: TSQLTransaction
+    Active = True
+    Database = SQLConnector1
+    Left = 704
+    Top = 184
+  end
+  object SQLConnector1: TSQLConnector
+    Connected = True
+    LoginPrompt = False
+    DatabaseName = 'shoba'
+    KeepConnection = False
+    Transaction = SQLTransaction1
+    UserName = 'root'
+    ConnectorType = 'ODBC'
+    Left = 704
+    Top = 96
+  end
+  object DataSourcePilihBarang: TDataSource
+    DataSet = SQLQueryPilihBarang
+    Left = 704
+    Top = 16
+  end
+  object SQLQuery2: TSQLQuery
+    FieldDefs = <>
+    Database = SQLConnector1
+    Transaction = SQLTransaction1
+    Params = <>
+    Macros = <>
+    Left = 80
+    Top = 280
+  end
+  object DataSource2: TDataSource
+    DataSet = SQLQuery2
+    Left = 80
+    Top = 200
+  end
+  object frReport1: TfrReport
+    Dataset = frDBDataSet1
+    InitialZoom = pzDefault
+    Options = []
+    PreviewButtons = [pbZoom, pbLoad, pbSave, pbPrint, pbFind, pbHelp, pbExit]
+    DataType = dtDataSet
+    Left = 80
+    Top = 24
+  end
+  object frDBDataSet1: TfrDBDataSet
+    CloseDataSource = True
+    DataSet = SQLQuery1
+    OnCheckEOF = frDBDataSet1CheckEOF
+    Left = 80
+    Top = 112
+  end
+  object SQLQuery1: TSQLQuery
+    IndexName = 'DEFAULT_ORDER'
+    MaxIndexesCount = 4
+    FieldDefs = <    
+      item
+        Name = 'id'
+        DataType = ftAutoInc
+        Precision = -1
+      end    
+      item
+        Name = 'customer'
+        DataType = ftString
+        Precision = -1
+        Size = 100
+      end    
+      item
+        Name = 'tanggal_transaksi'
+        DataType = ftDateTime
+        Precision = -1
+      end    
+      item
+        Name = 'jumlah'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'diskon_beli_barang'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'diskon_transaksi'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'sub_total'
+        DataType = ftFloat
+        Precision = -1
+      end    
+      item
+        Name = 'total'
+        DataType = ftFloat
+        Precision = -1
+      end    
+      item
+        Name = 'harga_beli'
+        DataType = ftFloat
+        Precision = -1
+      end    
+      item
+        Name = 'harga_jual'
+        DataType = ftFloat
+        Precision = -1
+      end    
+      item
+        Name = 'nama_barang'
+        DataType = ftString
+        Precision = -1
+        Size = 30
+      end    
+      item
+        Name = 'kategori'
+        DataType = ftString
+        Precision = -1
+        Size = 100
+      end>
+    Active = True
+    Database = SQLConnector1
+    Transaction = SQLTransaction1
+    SQL.Strings = (
+      'SELECT'
+      '    dt.id,'
+      '    t.customer,'
+      '    t.tanggal AS tanggal_transaksi,'
+      '    dt.jumlah,'
+      '    dt.diskon AS diskon_beli_barang,'
+      '    t.diskon AS diskon_transaksi,'
+      '    t.sub_total,'
+      '    t.total,'
+      '    db.harga_beli,'
+      '    db.harga_jual,'
+      '    db.nama AS nama_barang,'
+      '    k.nama AS kategori'
+      'FROM'
+      '    detail_transaksi AS dt'
+      'JOIN'
+      '    data_barang AS db ON db.id = dt.barang_id'
+      'JOIN'
+      '    kategori AS k ON k.id = db.id'
+      'JOIN'
+      '    transaksi AS t ON dt.transaksi_id = t.id;'
+      ''
+    )
+    Params = <>
+    Macros = <>
+    Left = 240
+    Top = 280
+  end
+end
